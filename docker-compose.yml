@@ -1,0 +1,9 @@
+services:
+  pyaravis_build:
+    build: .
+    container_name: pyaravis_build
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./run.sh:/run.sh
+    command: ["/run.sh"]

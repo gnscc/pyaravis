@@ -1,0 +1,23 @@
+[project]
+name = "pyaravis"
+version = "0.1.0"
+description = "Aravis for Python"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "SLF", "PLR0402"]
+ignore = ["F401", "E501"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.2",
+]
