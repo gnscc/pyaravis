@@ -1,10 +1,48 @@
 [project]
 name = "pyaravis"
-version = "0.1.0"
-description = "Aravis for Python"
+dynamic = ["version"]
+description = "A vision library for genicam based cameras"
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = []
+requires-python = ">=3.9"
+dependencies = [
+    "pygobject>=3.50.0",
+]
+keywords = ["aravis", "camera", "genicam", "vision"]
+license = " LGPL-2.1-only"
+authors = [{name = "@EmmanuelP"}, {name = "@gnscc"}]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Telecommunications Industry",
+  "Topic :: Multimedia :: Video :: Capture",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+
+[project.urls]
+Homepage = "https://github.com/AravisProject/aravis"
+Documentation = "https://aravisproject.github.io/aravis/aravis-stable/"
+Repository = "https://github.com/gnscc/pyaravis"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "pyaravis/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+ignore-vcs = true
+only-include = ["/pyaravis"]
+
+[tool.hatch.build.targets.wheel]
+ignore-vcs = true
+only-include = ["/pyaravis"]
 
 [tool.ruff]
 line-length = 100
