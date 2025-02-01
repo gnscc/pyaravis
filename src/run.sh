@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /
+
 # Fetch the latest release information
 RELEASE_DATA=$(curl -s https://api.github.com/repos/AravisProject/aravis/releases/latest)
 
@@ -27,12 +29,13 @@ cd ./build
 ninja
 cd /
 
-# Copy template files into output folder
+# Copy template __init__ file into output folder
 rm -rf /pyaravis/*
-cp /template/* /pyaravis/
+cp /src/template.py /pyaravis/__init__.py
 
-# Fix __init__.py
-sed -i "s/__REPLACE_VERSION__/${MAJOR_MINOR_VERSION}/g" "/pyaravis/__init__.py"
+# Add current version
+sed -i "s/__FULL_VERSION__/${FULL_VERSION}/g" "/pyaravis/__init__.py"
+sed -i "s/__MAJOR_MINOR_VERSION__/${MAJOR_MINOR_VERSION}/g" "/pyaravis/__init__.py"
 
 # Create lib path
 mkdir -p $LIB_PATH
@@ -40,7 +43,6 @@ mkdir -p $LIB_PATH
 # Copy library
 cp /aravis/build/src/libaravis-$MAJOR_MINOR_VERSION.so $LIB_PATH
 cp /aravis/build/src/Aravis-$MAJOR_MINOR_VERSION.typelib $LIB_PATH
-# ln -s $LIB_PATH/libaravis-$MAJOR_MINOR_VERSION.so $LIB_PATH/libaravis-$MAJOR_MINOR_VERSION.so.0
 
 export GI_TYPELIB_PATH=/aravis/build/src
 export LD_LIBRARY_PATH=/aravis/build/src
@@ -53,7 +55,7 @@ tar -xf v2.12.0
 echo "Generating stubs..."
 python3 /pygobject-pygobject-stubs-6835396/tools/generate.py Aravis $MAJOR_MINOR_VERSION > /tmp/Aravis.pyi
 
-python3 /tools/fix_stubs.py /tmp/Aravis.pyi /pyaravis/__init__.pyi
+python3 /src/fix_stubs.py /tmp/Aravis.pyi /pyaravis/__init__.pyi
 
 # Allow full access outside the container
 chmod -R 777  /pyaravis

@@ -5,8 +5,6 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ./run.sh:/run.sh
+      - ./src:/src
       - ./pyaravis:/pyaravis
-      - ./tools:/tools
-      - ./template:/template
-    command: ["/run.sh"]
+    command: ["/src/run.sh"]
