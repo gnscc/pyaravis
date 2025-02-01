@@ -7,5 +7,3 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Europe/Madrid apt-get install -y --no-inst
     libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev \
     libgirepository1.0-dev gettext python3-dev python3-pip wget curl
 RUN pip3 install meson ninja Markdown toml typogrify gi-docgen pygobject --break-system-packages
-
-COPY ./src pyaravis

@@ -6,4 +6,7 @@ services:
     stdin_open: true
     volumes:
       - ./run.sh:/run.sh
+      - ./pyaravis:/pyaravis
+      - ./tools:/tools
+      - ./template:/template
     command: ["/run.sh"]
